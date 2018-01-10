@@ -10,7 +10,7 @@ def hello_world():
 
 @app.route('/comments')
 def comments():
-    return jsonify(filter(None,list(markov_gen.generate(5, 'model_comments3'))))
+    return jsonify(filter(None,list(markov_gen.generate(5, 'tulevik'))))
 
 @app.route('/<path:path>')
 def static_file(path):
