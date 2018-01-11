@@ -8,12 +8,10 @@ class Generator:
 
 	def _get_next_word(self, word_list):
 		candidate_words = self.db.get_word_count(word_list)
-		print candidate_words
 		total_next_words = sum(candidate_words.values())
 		i = self.rnd.randint(total_next_words)
 		t=0
 		for w in candidate_words.keys():
-                        print w
 			t += candidate_words[w]
 			if (i <= t):
 				return w
@@ -21,11 +19,8 @@ class Generator:
 
 	def generate(self, word_separator):
 		depth = self.db.get_depth()
-		print depth
 		sentence = [Parser.SENTENCE_START_SYMBOL] * (depth - 1)
-		print sentence
 		end_symbol = [Parser.SENTENCE_END_SYMBOL] * (depth - 1)
-		print end_symbol
 
 		while True:
 			tail = sentence[(-depth+1):]
