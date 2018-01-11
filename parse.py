@@ -16,7 +16,7 @@ class Parser:
 		depth = self.db.get_depth()
 		sentences = txt.split(self.sentence_split_char)
 		i = 0
-
+                print len(sentences)
 		for sentence in sentences:
 			sentence = self.whitespace_regex.sub(" ", sentence).strip()
 
