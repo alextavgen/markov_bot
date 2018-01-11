@@ -16,7 +16,6 @@ class Parser:
 		depth = self.db.get_depth()
 		sentences = txt.split(self.sentence_split_char)
 		i = 0
-                print len(sentences)
 		for sentence in sentences:
 			sentence = self.whitespace_regex.sub(" ", sentence).strip()
 
@@ -27,11 +26,13 @@ class Parser:
 				list_of_words = list(sentence.lower())
 
 			words = [Parser.SENTENCE_START_SYMBOL] * (depth - 1) + list_of_words + [Parser.SENTENCE_END_SYMBOL] * (depth - 1)
-			
+
 			for n in range(0, len(words) - depth + 1):
 				self.db.add_word(words[n:n+depth])
 
 			i += 1
+			if i==39:
+				print i
 			if i % 1000 == 0:
 				print i
 				sys.stdout.flush()
