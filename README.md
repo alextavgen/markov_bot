@@ -3,14 +3,7 @@ This is a Python implementation of a Markov Text Generator.
 
 A [Markov Text Generator](http://en.wikipedia.org/wiki/Markov_chain) can be used to randomly generate (somewhat) realistic sentences, using words from a source text. Words are joined together in sequence, with each new word being selected based on how often it follows the previous word in the source document.
 
-The results are often just nonsense, but at times can be strangely poetic - the sentences below were generated from the text of The Hitchhikers Guide to the Galaxy:
-
-> Bits of perpetual unchangingness.  
-> So long waves of matter, strained, twisted sharply.  
-> So they are going to undulate across him and the species.  
-> The barman reeled for every particle of Gold streaked through her eye.  
-> We've met, haven't they? Look, said Ford never have good time you are merely a receipt.  
-> The silence was delighted.
+The results are often just nonsense, but at times can be strangely poetic.
 
 ### Parsing
 
@@ -25,7 +18,7 @@ The results are often just nonsense, but at times can be strangely poetic - the 
 
 For example:
 
-<pre>python markov.py parse hitchhikers_guide 2 /path/to/hitchhikers.txt
+<pre>python markov.py parse model_name 2 output.txt
 </pre>
 
 The parsing process may take a while to complete, depending on the size of the input document.</section>
@@ -42,10 +35,30 @@ The parsing process may take a while to complete, depending on the size of the i
 
 For example:
 
-<pre>>python markov.py gen hitchhikers_guide 3
-Look, I can't speak Vogon! You don't need to touch the water
-He frowned, then smiled, then tried to gauge the speed at which they were able to pick up hitch hikers
-The hatchway sealed itself tight, and all the streets around it
+<pre>python markov.py gen model_name 3
+
 </pre>
 
+### Web bundle
+
+<section>
+  app.py is a Flask application, which serves static index.html file,
+  
+  <pre>@app.route('/')
+  def hello_world():
+    return current_app.send_static_file('index.html')</pre>
+     
+  and has a REST point bounded to address
+     
+  <pre>
+    @app.route('/comments')
+    def comments():
+      return jsonify(filter(None,list(markov_gen.generate(5, 'tulevik'))))
+  </pre>
+  
+  This REST point is serving data for Web page. Web page is a bootstrap based template with jQuery AJAX call.
+  
+  It is possible to bind any model, it should return list of generated sentences. So it is possible to change markov model on TensorFlow based RNN, with the same Web UI
+  
+  
 </section>
