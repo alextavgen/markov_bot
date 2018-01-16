@@ -28,7 +28,7 @@ if __name__ == '__main__':
 		file_name = args[4]
 
 		db = Db(sqlite3.connect(name + '.db'), Sql())
-		db.setup(4)
+		db.setup(depth)
 
 		txt = codecs.open(file_name, 'r', 'utf-8').read()
 		Parser(name, db, SENTENCE_SEPARATOR, WORD_SEPARATOR).parse(txt)
